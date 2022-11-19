@@ -1,5 +1,5 @@
 from django.db import models
-
+from .place_to_geocode import geocode
 
 #air quality table
 class Airq(models.Model):
@@ -9,8 +9,16 @@ class Airq(models.Model):
     value = models.FloatField(blank=True, null=True)
     value_type = models.TextField(blank=True, null=True)
 
+    #northeastern bounds
+    latitude_ne = models.FloatField(blank=True, null = True)
+    longitude_ne = models.FloatField(blank=True, null = True)
+
+    #southwestern bounds
+    latitude_sw = models.FloatField(blank=True, null = True)
+    longitude_sw = models.FloatField(blank=True, null = True)
+
     class Meta:
-        managed = False
+        managed = True
         db_table = 'airq'
 
 #green infrastructure table

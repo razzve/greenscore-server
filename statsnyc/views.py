@@ -3,13 +3,28 @@ from django.shortcuts import render
 from .models import Airq, Greeninfra
 #connection for raw sql queries to the db
 from django.db import connection, transaction
+from django.db.models import F
+
 from django.http import HttpResponse
+from .place_to_geocode import geocode
 
 #getAirq accepts an http request with a place GET parameter 
 #returns an http response with all the air quality metrics for it
 def getAirq(request):
 	place = request.GET.get('place', '')
 	result = Airq.objects.filter(geo_place = place)
+
+	for obj in Airq.objects.all():
+		pl = obj.geo_place
+	
+		gcode = geocode(pl)
+		obj.latitude_ne = gcode[0][0]
+		obj.longitude_ne = gcode[0][1]
+		obj.latitude_sw = gcode[1][0]
+		obj.longitude_sw= gcode[1][1]
+
+		obj.save()
+
 
 	return HttpResponse(result.values())
 
