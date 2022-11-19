@@ -14,19 +14,28 @@ def getAirq(request):
 	place = request.GET.get('place', '')
 	result = Airq.objects.filter(geo_place = place)
 
-	for obj in Airq.objects.all():
-		pl = obj.geo_place
-	
-		gcode = geocode(pl)
-		obj.latitude_ne = gcode[0][0]
-		obj.longitude_ne = gcode[0][1]
-		obj.latitude_sw = gcode[1][0]
-		obj.longitude_sw= gcode[1][1]
+	#for obj in Airq.objects.all():
+	#	pl = obj.geo_place
+	#
+	#	gcode = geocode(pl)
+	#	obj.latitude_ne = gcode[0][0]
+	#	obj.longitude_ne = gcode[0][1]
+	#	obj.latitude_sw = gcode[1][0]
+	#	obj.longitude_sw= gcode[1][1]	
+	#	obj.save()
 
-		obj.save()
+	
 
 
 	return HttpResponse(result.values())
+
+def calcAQI(request):
+	for obj in Airq.objects.all():
+		the_aqi = 1 #this would be the aqi
+		obj.aqi = the_aqi
+		obj.save()
+
+
 
 #getGreeninfra accepts an http request with longitude and latitude parameters
 #returns an http response with the green infrastructure metrics for the coordinates

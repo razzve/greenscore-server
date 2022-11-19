@@ -17,11 +17,12 @@ Including another URLconf
 from django.urls import path, include
 
 #importing views (as functions)
-from .views import getAirq, getGreeninfra
+from .views import getAirq, getGreeninfra, calcAQI
 
 #airq for fetching air quality data
 #greeninfra for fetching gree infrastructure data
 urlpatterns = [
     path('airq/', getAirq),
-    path('greeninfra/', getGreeninfra)
+    path('greeninfra/', getGreeninfra),
+    path('precalc/', calcAQI)
 ]
