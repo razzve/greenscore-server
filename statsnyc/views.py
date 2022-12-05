@@ -54,6 +54,7 @@ def getGreeninfra(request):
 		return 2 * 3956 * math.asin(a)
 	
 	greenarea_total = 0
+
 	
 	for obj in Greeninfra.objects.all():
 		if dist_away(float(lng), float(lat), float(obj.longitude), float(obj.latitude)) < 0.5:
