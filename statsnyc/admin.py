@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import Airq, Greeninfra
+from .models import Greeninfra
 
-admin.site.register(Airq)
 admin.site.register(Greeninfra)
