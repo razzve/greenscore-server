@@ -1,0 +1,19 @@
+import pandas as pd
+
+url = 'https://api.waqi.info'
+
+# key: https://aqicn.org/data-platform/token/#/
+key = 'beb6375fb5bd62536b87aba304f09b629442758d'
+
+
+# bounds around New York via bboxfinder.com
+bounds = '-74.047852,40.541982,-73.574066,40.951900'
+
+urlBounds = f'/map/bounds/?latlng={bounds}&token={key}'
+data = pd.read_json(url + urlBounds)
+
+for row in data:
+	print(row)
+
+
+
